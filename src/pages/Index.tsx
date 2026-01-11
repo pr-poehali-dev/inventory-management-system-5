@@ -9,6 +9,7 @@ import Icon from '@/components/ui/icon';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { exportToExcel, exportToPDF, exportToCSV } from '@/lib/exportUtils';
 
 interface Product {
   id: number;
@@ -451,7 +452,10 @@ const Index = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start hover:bg-green-50 hover:border-green-300 transition-colors"
-                      onClick={() => toast({ title: 'Excel экспорт', description: 'Функция в разработке' })}
+                      onClick={() => {
+                        exportToExcel(products, sales, purchases);
+                        toast({ title: 'Успешно!', description: 'Отчет экспортирован в Excel' });
+                      }}
                     >
                       <Icon name="FileSpreadsheet" className="mr-2 text-green-600" />
                       Экспорт в Excel
@@ -459,7 +463,10 @@ const Index = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start hover:bg-red-50 hover:border-red-300 transition-colors"
-                      onClick={() => toast({ title: 'PDF экспорт', description: 'Функция в разработке' })}
+                      onClick={() => {
+                        exportToPDF(products, sales, purchases);
+                        toast({ title: 'Успешно!', description: 'Отчет экспортирован в PDF' });
+                      }}
                     >
                       <Icon name="FileText" className="mr-2 text-red-600" />
                       Экспорт в PDF
@@ -467,7 +474,10 @@ const Index = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start hover:bg-blue-50 hover:border-blue-300 transition-colors"
-                      onClick={() => toast({ title: 'CSV экспорт', description: 'Функция в разработке' })}
+                      onClick={() => {
+                        exportToCSV(products, sales, purchases);
+                        toast({ title: 'Успешно!', description: 'Отчет экспортирован в CSV' });
+                      }}
                     >
                       <Icon name="Download" className="mr-2 text-blue-600" />
                       Экспорт в CSV
